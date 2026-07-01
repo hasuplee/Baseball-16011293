@@ -1,7 +1,13 @@
 class Game:
+    def __init__(self):
+        self._question = ""
+
     def guess(self, guess_number: str):
         self._assert_illegal_value(guess_number)
-        return GameResult(True, 3, 0)
+        if guess_number == self._question:
+            return GameResult(True, 3, 0)
+        else:
+            return None
 
     def _assert_illegal_value(self, guess_number: str):
         if guess_number is None:
@@ -16,11 +22,28 @@ class Game:
 
     def _isDuplicatedNumber(self, guessNumber: str):
         return guessNumber[0] == guessNumber[1] or \
-                guessNumber[0] == guessNumber[2] or \
-                guessNumber[1] == guessNumber[2]
+            guessNumber[0] == guessNumber[2] or \
+            guessNumber[1] == guessNumber[2]
+    @property
+    def question(self):
+        raise AttributeError("읽을 수 없는 속성")
+    @question.setter
+    def question(self, value):
+        self._question = value
+
 
 class GameResult:
     def __init__(self, solved, strikes, balls):
-        self.solved = solved
-        self.strikes = strikes
-        self.balls = balls
+        self._solved = solved
+        self._strikes = strikes
+        self._balls = balls
+
+    @property
+    def solved(self):
+        return self._solved
+    @property
+    def strikes(self):
+        return self._strikes
+    @property
+    def balls(self):
+        return self._balls
