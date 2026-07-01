@@ -1,4 +1,4 @@
-from baseball import Game
+from baseball import Game, GameResult
 import pytest
 
 
@@ -14,5 +14,13 @@ def assert_illegal_argument(game: Game, guess_number: str):
 @pytest.mark.parametrize("invalid_input", [None, '12', '1234', '12s', '121'])
 def test_exception_when_invalid_input(game, invalid_input):
     assert_illegal_argument(game, invalid_input)
+
+def test_return_solved_result_ijf_matched_number(game):
+    game.question = "123"
+    result: GameResult = game.guess("123")
+    assert result is not None
+    assert result.solved == True
+    assert result.strikes == 3
+    assert result.balls == 0
 
 

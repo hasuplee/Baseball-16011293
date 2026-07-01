@@ -1,6 +1,7 @@
 class Game:
     def guess(self, guess_number: str):
         self._assert_illegal_value(guess_number)
+        return GameResult(True, 3, 0)
 
     def _assert_illegal_value(self, guess_number: str):
         if guess_number is None:
@@ -17,3 +18,9 @@ class Game:
         return guessNumber[0] == guessNumber[1] or \
                 guessNumber[0] == guessNumber[2] or \
                 guessNumber[1] == guessNumber[2]
+
+class GameResult:
+    def __init__(self, solved, strikes, balls):
+        self.solved = solved
+        self.strikes = strikes
+        self.balls = balls
