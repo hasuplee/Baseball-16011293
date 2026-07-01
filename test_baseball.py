@@ -15,12 +15,20 @@ def assert_illegal_argument(game: Game, guess_number: str):
 def test_exception_when_invalid_input(game, invalid_input):
     assert_illegal_argument(game, invalid_input)
 
-def test_return_solved_result_ijf_matched_number(game):
+def test_return_solved_result_if_matched_number(game):
     game.question = "123"
     result: GameResult = game.guess("123")
     assert result is not None
     assert result.solved == True
     assert result.strikes == 3
+    assert result.balls == 0
+
+def test_return_solved_result_if_unmatched_number(game):
+    game.question = "123"
+    result: GameResult = game.guess("456")
+    assert result is not None
+    assert result.solved == False
+    assert result.strikes == 0
     assert result.balls == 0
 
 
